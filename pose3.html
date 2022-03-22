@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.css" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="demo.css" crossorigin="anonymous">
+  <link href="http://fonts.cdnfonts.com/css/disco" rel="stylesheet">
+  <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/pose.js" crossorigin="anonymous"></script>
+  
+
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/adzialocha/osc-js/lib/osc.js"></script>
+  
+  <style>
+      body{
+        font-family: 'Source Sans Pro', sans-serif;
+      }
+    #videocontainer {
+        margin: 0px auto;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+    #videoElement {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        transform: rotateY(180deg);
+        -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+        -moz-transform:rotateY(180deg);
+    }
+
+.Layout {  display: grid;
+    z-index: 999;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  grid-template-rows: 0.7fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 5px 5px;
+  grid-auto-flow: row;
+  justify-items: stretch;
+  grid-template-areas:
+    "Keyboard Keyboard Keyboard"
+    "Samples Blank Effects"
+    "Samples Blank Effects";
+}
+
+.Samples { grid-area: Samples;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 20px;
+            margin: 10px;
+            text-align: center; 
+            color: #fff;
+            font-family:  Helvetica, sans-serif;
+            font-size: 50px;
+            border: 2px;
+            box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+
+.Keyboard { grid-area: Keyboard;
+    background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 20px;
+            margin: 10px;
+            text-align: center; 
+            color: #fff;
+            font-family:  Helvetica, sans-serif;
+            font-size: 50px;
+            border: 2px;
+            box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff;  }
+
+.Effects { grid-area: Effects; 
+    background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 20px;
+            margin: 10px;
+            text-align: center; 
+            color: #fff;
+            font-family:  Helvetica, sans-serif;
+            font-size: 50px;
+            border: 2px;
+            box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+
+.Blank { grid-area: Blank; }
+
+
+.Side-Panels {  display: grid;
+    height:95%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 10px 10px;
+  grid-auto-flow: row;
+  justify-items: stretch;
+  grid-template-areas:
+    "Top"
+    "Middle"
+    "Bottom";
+}
+
+.Middle { grid-area: Middle;
+    background-color: rgba(194, 38, 111, 0);
+        border-radius: 10px;
+        margin: 20px;
+        height: 95%;
+        box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+
+.Bottom { grid-area: Bottom;
+    background-color: rgba(194, 38, 111, 0);
+        border-radius: 10px;
+        margin: 20px;
+        height: 95%;
+        box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+
+.Top { grid-area: Top;
+    background-color: rgba(194, 38, 111, 0);
+        border-radius: 10px;
+        margin: 20px;
+        height: 95%;
+        box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+
+   
+ .Sample-layout {  display: grid;
+  height: 98%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 5px 5px;
+  grid-auto-flow: row;
+  justify-items: stretch;
+  grid-template-areas:
+    "Sample1 Sample2 Sample3";
+}
+
+.Sample1 { grid-area: Sample1;
+    background-color: rgba(194, 38, 38, 0);
+        border-radius: 10px;
+        margin: 10px;
+        height: 95%;
+        box-shadow:
+        0 0 5px #fff,
+        -5px 0 10px #f0f,
+        3px 0 20px #0ff; }
+
+.Sample2 { grid-area: Sample2;
+           background-color: rgba(194, 38, 38, 0);
+        border-radius: 10px;
+        margin: 10px;
+        height: 95%;
+        box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+
+.Sample3 { grid-area: Sample3;
+           background-color: rgba(194, 38, 38, 0);
+        border-radius: 10px;
+        margin: 10px;
+        height: 95%;
+        box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+
+.Controller {  display: grid;
+    height: 90%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1.5fr 1.5fr 1.5fr;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  justify-items: stretch;
+  grid-template-areas:
+    "Title"
+    "Up"
+    "Value"
+    "Down";
+}
+
+.Title { grid-area: Title;
+    margin:0px;
+    padding: 0px;
+    font-size: 20px; }
+
+.Up { grid-area: Up;
+      margin:0px;
+    padding: 0px;
+    font-size: 20px;
+     }
+
+.Value { grid-area: Value;
+    margin:0px;
+    padding: 0px;
+    font-size: 30px;
+    margin-top: 3px;
+ }
+
+.Down { grid-area: Down;
+    margin:0px;
+    padding: 0px;
+    font-size: 20px; }
+
+
+
+.Left { grid-area: Left; }
+
+.Effect { grid-area: Effect; }
+
+.Right { grid-area: Right; }
+.Sampler {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 5px 5px;
+  grid-auto-flow: row;
+  justify-items: stretch;
+  grid-template-areas:
+    "Option1 Option2 Option3"
+    "Off Off Off";
+}
+
+.Option1 { grid-area: Option1; }
+
+.Option2 { grid-area: Option2; }
+
+.Option3 { grid-area: Option3; }
+
+.Off { grid-area: Off; }
+
+    
+    .Drum1 { grid-area: Drum1;
+        background-color: rgba(194, 38, 111, 0);
+        border-radius: 10px;
+        margin: 10px;
+        height: 95%;
+        box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+    
+    .Drum2 { grid-area: Drum2;
+        background-color: rgba(194, 38, 72, 0);
+        border-radius: 10px;
+        margin: 10px;
+        height: 95%;
+        box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+    .pianoKey{
+        
+            border-radius: 20px;
+            height: 95%;
+            margin: 10px;
+            text-align: center;
+            color: #fff;
+            font-size: 50px;
+    
+    }
+    .keyspiano {  display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-auto-columns: 1fr;
+      grid-auto-rows: 1fr;
+      gap: 0px 0px;
+      height: 62%;
+      width:100%;
+      margin-top: 10px;
+      grid-auto-flow: row;
+      justify-items: stretch;
+      grid-template-areas:
+        "C D E F G A B";
+    }
+    
+    .C { grid-area: C; }
+    
+    .D { grid-area: D; }
+    
+    .E { grid-area: E; }
+    
+    .F { grid-area: F; }
+    
+    .G { grid-area: G; }
+    
+    .A { grid-area: A; }
+    
+    .B { grid-area: B; }
+    
+    
+    .buttons {  display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      gap: 20px 20px;
+      height: 95%;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "titleSample"
+        "topSample"
+        "middleSample"
+        "bottomSample";
+    }
+    .titleSample { grid-area: titleSample;
+        font-size: 30px;
+     }
+    
+    .topSample { grid-area: topSample; }
+    
+    .middleSample { grid-area: middleSample; }
+    
+    .bottomSample { grid-area: bottomSample; }
+    
+    .slider {  display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.6fr 0.3fr 2.8fr 0.3fr;
+      grid-auto-columns: 1fr;
+      grid-auto-rows: 1fr;
+      gap: 10px 10px;
+      height:95%;
+      grid-auto-flow: row;
+      justify-items: stretch;
+      grid-template-areas:
+      
+        "sliderTitle"
+        "sliderMax"
+        "sliderVariable"
+        "sliderMin";
+    }
+    
+    .sliderTitle { grid-area: sliderTitle;
+        font-size:30px;
+    
+     }
+    
+    .sliderMax { grid-area: sliderMax;
+        font-size:18px; }
+    
+    .sliderVariable { grid-area: sliderVariable;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 20px;
+        margin: 20px;
+        box-shadow:
+            0 0 5px #fff,
+            -5px 0 10px #f0f,
+            3px 0 20px #0ff; }
+    
+    .sliderMin { grid-area: sliderMin;
+        font-size:18px; }
+.Sampler {  display: grid;
+        
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.4fr 2fr 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 5px 5px;
+  grid-auto-flow: row;
+  justify-items: stretch;
+  
+  grid-template-areas:
+    "Title Title Title"
+    "Option1 Option2 Option3"
+    "Off Off Off";
+}
+
+.Option1 { grid-area: Option1; }
+
+.Option2 { grid-area: Option2; }
+
+.Option3 { grid-area: Option3; }
+
+.Off { grid-area: Off; }
+
+.Title { grid-area: Title; }
+
+    
+    
+    .on{
+        background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            height: 100%;
+            margin: 10px;
+            opacity: 0.7;
+            box-shadow:
+        inset 0 0 20px #fff,      /* inner white */
+        inset 10px 0 40px #f0f,   /* inner left magenta short */
+        inset -10px 0 40px #0ff,  /* inner right cyan short */
+        inset 10px 0 150px #f0f,  /* inner left magenta broad */
+        inset -10px 0 150px #0ff, /* inner right cyan broad */
+        0 0 25px #fff,            /* outer white */
+        -5px 0 40px #f0f,        /* outer left magenta */
+        5px 0 40px #0ff;
+    
+    }
+    .off{
+        background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            height: 100%;
+            margin: 10px;
+            margin-bottom: 0px;
+    
+    }
+</style>
+
+    
+    
+    
+</head>
+<div style="position: absolute; width: 100vw; height:100vw; background-color: black"></div>
+
+<body style="background-color: black; width: 100vw; ">
+    <div style="width:1000px; height:1000px;position: absolute;margin-top: 20px; margin-left:28%;">
+        <canvas id="handPosleft" style="position:absolute; z-index: 999999999;" width="1000px" height="1000px"></canvas>
+        <canvas id="handPosright" style="position:absolute; z-index: 999999998;" width="1000px" height="1000px"></canvas>
+        <div class="Layout" style=" height:1000px; z-index: 99999999;">
+            <div class="Samples" style="z-index: 99999999;">
+                <div class="Side-Panels">
+                    <div class="Middle">
+                        <div class="Controller">
+                            <div class="Title">Filter</div>
+                            <div id="fmax"  class="Up off">Up</div>
+                            <div id="fnum"  class="Value">0</div>
+                            <div id="fmin" class="Down off">Down</div>
+                        </div>
+                    </div>
+                    <div class="Bottom">
+                        <div class="Controller">
+                            <div class="Title">Volume (Gain)</div>
+                            <div id="vmax"  class="Up off">Up</div>
+                            <div id="vnum" class="Value">0</div>
+                            <div id="vmin" class="Down off">Down</div>
+                          </div>
+                    </div>
+                    <div class="Top">
+                        <div class="Controller">
+                            <div class="Title">Tempo (bpm)</div>
+                            <div id="tmax" class="Up off">Up</div>
+                            <div id="tnum" class="Value">126</div>
+                            <div id="tmin"class="Down off">Down</div>
+                          </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="Keyboard" style="z-index: 99999999;">
+                <div style="font-size: 36px;">keyboard</div>
+                    <div class="keyspiano">
+                        <div id="C" class="C pianoKey on">C</div>
+                        <div id="D" class="D pianoKey off">D</div>
+                        <div id="E" class="E pianoKey off">E</div>
+                        <div id="F" class="F pianoKey off">F</div>
+                        <div id="G" class="G pianoKey off">G</div>
+                        <div id="A" class="A pianoKey off">A</div>
+                        <div id="B" class="B pianoKey off">B</div>
+                </div>
+            </div>
+            <div class="Effects" style="z-index: 99999999;">
+                <div class="Side-Panels">
+                    <div class="Middle">
+                        <div class="Controller">
+                            <div class="Title">Bass</div>
+                            <div id="bmax" class="Up off">Next Sample</div>
+                            <div id="bnum" class="Value">off</div>
+                            <div id="bmin" class="Down off">Previous Sample</div>
+                        </div>
+                    </div>
+                    <div class="Bottom">
+                        <div class="Controller">
+                            <div class="Title">Melody</div>
+                            <div  id="mmax" class="Up off">Next Sample</div>
+                            <div  id="mnum" class="Value">off</div>
+                            <div  id="mmin" class="Down off">Previous Sample</div>
+                          </div>
+                    </div>
+                    <div class="Top">
+                        <div class="Controller">
+                            <div class="Title">Drums</div>
+                            <div  id="dmax" class="Up off">Next Sample</div>
+                            <div  id="dnum" class="Value">off</div>
+                            <div  id="dmin" class="Down off">Previous Sample</div>
+                          </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="Blank"></div>
+          </div>
+        </div>
+            
+            
+        
+        
+      <!-- CONTENTS --> 
+  <div class="container" style="margin-top: 20px; position: absolute; background-color: black; width: 100%;">
+
+    <div class="columns">
+      
+      <!-- WEBCAM INPUT -->
+      <div class="column">
+        <article style = "opacity:0; display: none;"class="panel is-info">
+          <p class="panel-heading">
+            Webcam Input
+          </p>
+          <div class="panel-block">
+            <video class="input_video5"></video>
+          </div>
+        </article>
+      </div>
+
+      <!-- MEDIAPIPE OUTPUT -->
+      <div class="column">
+
+            <canvas class="output5" style="border-radius: 30px; margin-left: 50%;" width="1000px" height="1000px"></canvas>
+            
+    </div>
+    
+    <div class="loading">
+      <div class="spinner"></div>
+      <div  style = "opacity:0; display: none;" id="xhand">hello</div>
+    </div>
+    <div style="visibility: hidden;" class="control5">
+  </div>
+  <script type="text/javascript" src="pose2.js"></script>
+</body>
+</html>
