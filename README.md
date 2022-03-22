@@ -77,11 +77,31 @@ To start building a track each stem loop must be initiated, by selecting ‘Trac
   <summary>Filtering Effects</summary>
   
   ## Filtering Effects
-The looping function is built around the groove~ function in Max. This function accesses the buffer to which it is assigned and allows it to be looped. It also allows various parameters to be controlled, with values brought in with udpreceive from the Node server. Tempo is controlled by changing the speed of the signal running into groove~. The Time Stretch function has been used to stop the samples from changing pitch when the tempo is increased. The volume of the track is controlled by simply scaling a slider to appropriate dB values (-70 to +6) and using the output to drive the master gain. The gain of each stem can be controlled within the patch, to mix the track, however this has been pre-mixed to appropriate values for a good balance.
-  
-To start building a track each stem loop must be initiated, by selecting ‘Track ON/OFF’. This starts the stems synchronously and silently until the sound for each is turned ion. Technically, the ‘turning on/off’ of the stems is achieved by setting the amplitude of signal to 0, if toggled off, and 1, if toggled on. The ‘Loop’, ‘Sync’, ‘Time Stretch’ and ‘Speakers’ toggles all also must be turned on at the programs start. Since some of the samples are different lengths, the Loop Sync output of groove~ is used to start the other loops from the beginning whenever the drumbeat reaches the start of the sample. 
+Lowpass and highpass filtering can be added to the track similarly to the tempo and volume. Using an **if else** function, the upper half of the slider controls the highpass filter and the lower half controls the lowpass filter. Inside the **lowpass_highpass** subpatch, the **filtergraph~** function is used to select the filter shapes, and the slider value (scaled), is used to drive the cut off frequency and gain. With the filter shape defined, the **biquad~** function is used to implement the filter to both audio channels, applying the distinctive sound effect incorporated in most DJ decks. Filtering can be used to hide the transitions between loops to create a seamless audio experience.
 
 </details>
+
+<details>
+  <summary>Sample Synthesiser</summary>
+  
+  ## Sample Synthesiser
+The most complex part of the patch is the sample synthesiser. It can be split into three functions: the control of a MIDI keyboard, syncing the notes to the track and using the keyboard to play the sample at different pitches.
+  
+  ### MIDI Keyboard
+The keyboard is played by holding your hand over the desired key on screen. When a key is selected its number is sent through a selector sends out the corresponding MIDI value for the note. The MIDI values here make up the C harmonic minor scale. Next this MIDI value has a defined multiple of 12 added, to shift the note up or down the octave. It is then packaged up with a key velocity value given by the global volume control and sent out as a MIDI message with the **midiformat** function. The note is released in a similar way: a message for the key release is sent through, this time with a key velocity of 0. This cuts the played note off.  
+
+  ### Syncing the Keyboard
+The keyboard has been configured to only play in time with the music. This was achieved by syncing it to the main looper with a metronome at the tempo dictated by the tempo slider in ms. The metronome sends out a bang every two beats, but this is only allowed through the **gate** into the **simplekeyboardv2** bpatcher when the computer vision recognises the hand over a key. This means the keyboard will play in time and only when a key is selected. The metronome also sends a delayed bang on the offbeat which triggers the key to be released inside the keyboard bpatcher. 
+  
+   ### Playing a Sample
+With the keyboard playing in time, it can be used to control and manipulate our synth sample. This is done in a custom function I built, called **SampleSynthv2**. The **notein** function receives our MIDI note-on and note-off messages from the keyboard and sends them into **SampleSynthv2**. Inside the MIDI messages are unpacked into note number and key velocity (i.e. volume). If the volume is non-zero, indicating a key has been selected, a message to start playing the sample loaded in the synth buffer is sent out. The volume is also scaled to decibels and used to control the live gain of the sample.
+  
+The MIDI note number is converted to frequency (**mtof**), and then divided by the frequency of C4. This creates a scaling factor with which the sample can be pitch shifted, to play the sample at the pitch of the note played. The playback speed of the sample is also defined by the main tempo slider for the patch, with **Timestretch** again being applied to ensure any change to the tempo will not affect the pitch of the sample.
+
+  
+</details>
+
+
 
 
 <details>
