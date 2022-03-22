@@ -11,7 +11,7 @@ Techno-cv is an interactive audio installation whereby a minimal techno track ca
   </p>
 
  <p align="center">
-  <i>N.B. Whilst this report outlines the project as a whole, there is a focus on the work I personally contributed.</i>
+  <i>N.B. Whilst this report outlines the project as a whole, I have focussed on the work I personally contributed.</i>
   </p>
   
 ## Gallery
