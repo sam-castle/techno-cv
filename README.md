@@ -24,6 +24,7 @@ Techno-cv is an interactive audio installation whereby a minimal techno track ca
   
   ## Aim of the Work
 All three of us love dance music AND dancing to music. This project birthed from the thought: what if instead of **dancing to music** you could **dance to create music**? Too long have DJs been constrained to their decks, the aim of this work is to explore whether exciting and commercially viable dance music can be created in a manner that is more **expressive** and **stimulating**.
+  <br/><br/>
   <p align="center">
     <img width="600" src="images/thomasbangalter.jpg">
 </p>
@@ -87,16 +88,25 @@ With the position of the hands known, a Javascript selection algorithm was used.
 As I had prior experience working in Max 8, I created the audio control patch to take in the gesture inputs and build a track from them. The core functionality of the patch is based on a three-track looper which allows you to build up a simple techno track from a predefined set of samples and manipulate parameters such as tempo and volume. In addition, the patch allows you to apply effect filters, high- and lowpass, distorting the sound as DJs often do on their decks. Finally, the patch allows you to play a sample up and down a scale, perfectly in time, over the loop with a synchronised sample synthesiser.
   
 Therefore, we can split the functionality of the patch down into four main stages: selecting the samples, looping the samples (and controlling their gain and tempo), applying high and lowpass filters, and playing the sample synth on the predefined scale.
+  
+**The patch can be controlled with the gesture inputs via the computer vision system or via the Max interface and key presses on the computer keyboard.**
   <br/><br/>
    <p align="center">
-    <img width="800" src="images/toplevelmax.png">
+    <img width="1000" src="images/toplevelmax.PNG">
 </p>
 
 <p align="center">
   <i>Top level of Max patch</i>
 </p>  
+  <p align="center">
+   <img width="600" src="images/pm.PNG">
+</p>
+
+<p align="center">
+  <i>Patch in presentation mode</i>
+</p>  
   <br/><br/>
-<i>The patch can be controlled with the gesture inputs via the computer vision system or via the Max interface and key presses on the computer keyboard.</i>
+
 
 </details>
 
@@ -112,7 +122,7 @@ The samples were downloaded from the free sample library at BandLab. A great dea
    ### Switching Between Samples
   With the samples chosen, they were loaded into the Max patch. This was achieved using four buffers (**buffer~**), one for each stem and one for the sample synth. Using **radiogroups** a new sample can be loaded into the buffer by clicking on the corresponding dot. Inside the subpatchers **drumsamples**, **basssamples**, and **melodicsamples**, replace messages, calling .wav files from the computer, are sent to the buffer with the **select** function. The new sample carries on playing from the same point in the buffer allowing the track to remain synchronised.
   
-To control the sample switches using the computer vision inputs, the patch needed a way to take in that data. The **udpreceive** function (port 8080) takes in streams of OSC data from Javascript, via the Node server, for each stem and channels them into the **receivedata** subpatcher. For each variable the choice of sample (1, 2 or 3) is sent into an **int** function stores the selection until a beat from the metronome is sent through. Since the data input is a continuous stream, the **change** function is used to only identify when the selection has changed.
+To control the sample switches using the computer vision inputs, the patch needed a way to take in that data. The **udpreceive** function (port 8080) takes in streams of OSC data from Javascript, via the Node server, for each stem and channels them into the **receivedata** subpatcher. For each variable the choice of sample (off, 1, 2 or 3) is sent into an **int** function, storing the selection until a beat from the metronome is sent through. Since the data input is a continuous stream, the **change** function is used to only identify when the selection has changed.
 
 </details>
 
