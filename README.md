@@ -1,5 +1,5 @@
 <h1 align="center">
-  techno-cv
+  pose and tunes.
   </h1>
  <p align="center">
   <i>Sam Castle, Ted Kane, Jack Polturak</i> <br/>
@@ -7,18 +7,22 @@
 </p>
 <br/><br/>
 <p align="center">
-Techno-cv is an interactive audio installation whereby a minimal techno track can be built-up and manipulated using just gestures. Displayed on a visual interface, samples can be selected and moulded, effects applied, and a sample synthesiser played, simply by moving one’s arms in space. The positions of your hands are tracked, using an opensource computer vision system, and used to trigger buttons on the interface. These buttons in turn manipulate the parameters of a custom Max 8 patch in which samples are layered and filters applied to create a versatile minimal techno. A video of the installation can be found here.
-  </p>
+Techno-cv is an interactive audio installation whereby a minimal techno track can be built-up and manipulated using just gestures. Displayed on a visual interface, samples can be selected and moulded, effects applied, and a sample synthesiser played, simply by moving one’s arms in space. The positions of your hands are tracked, using an opensource computer vision system, and used to trigger buttons on the interface. These buttons in turn manipulate the parameters of a custom Max 8 patch in which samples are layered and filters applied to create a versatile minimal techno. A short video of the installation can be found <a href="https://youtube.com/watch?v=shPU7SSHDCY/">here</a>.
+  
 
- <p align="center">
-  <i>N.B. Whilst this report outlines the project as a whole, I have focussed on the work I personally contributed.</i>
   </p>
+ 
+
+
   
 ## Gallery
 
 
 ## Contents
 
+ <p align="center">
+  <i>N.B. Whilst this report outlines the project as a whole, I have focussed on the work I personally contributed.</i>
+  </p>
 <details>
   <summary>Aim of the Work</summary>
   
@@ -69,6 +73,8 @@ To control the interface with gestures the hand positions of the user need to be
   
   ## User Interface
 With the position of the hands known, a Javascript selection algorithm was used. The interface was built in HTML and hosted on a browser. It consists of an array of buttons to control the techno track. If the correct hand’s XY coordinates fall within a certain known region for a specific button, the Javascript function both lights up the button and changes the value of the object on the interface, and sends a new OSC message to Max to control parts of the patch. These messages are sent via the node.js server which connects the corresponding ports (8080) and transfers the data stream. An example message would be a value between 0-127 for master volume.
+  
+  Have a play with the interface [here](https://posentunes.web.app/).
   <br/><br/>
  <p align="center">
  <img width="800" src="images/interface.png">
