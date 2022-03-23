@@ -65,7 +65,14 @@ Here is a high-level system diagram of the installation:
   
   ## Computer Vision
 To control the interface with gestures the hand positions of the user need to be tracked. To do so, the computer’s webcam is accessed and an opensource pose model was used, Google’s Media Pipe, a highly accurate, and responsive system. With this, the user’s hands are identified and their 2D coordinates on the screen are defined and used to trigger samples and effects. The positions of the hands are shown visually on the screen for the user as a point of reference.
+  <br/><br/>
+ <p align="center">
+ <img width="400" src="images/cv.png">
+</p>
 
+<p align="center">
+  <i>MediaPipe was used for pose tracking</i>
+</p>
 </details>
 
 <details>
