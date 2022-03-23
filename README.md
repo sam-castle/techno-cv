@@ -23,7 +23,7 @@ Techno-cv is an interactive audio installation whereby a minimal techno track ca
   <summary>Aim of the Work</summary>
   
   ## Aim of the Work
-All three of us love dance music AND dancing to music. This project birthed from the thought: what if instead of **dancing to music** you could **dance to create music**. Too long have DJs been constrained to their decks, the aim of this work is to explore whether exciting and commercially viable dance music can be created in a manner that is more **expressive** and **stimulating**.
+All three of us love dance music AND dancing to music. This project birthed from the thought: what if instead of **dancing to music** you could **dance to create music**? Too long have DJs been constrained to their decks, the aim of this work is to explore whether exciting and commercially viable dance music can be created in a manner that is more **expressive** and **stimulating**.
   <p align="center">
     <img width="600" src="images/thomasbangalter.jpg">
 </p>
@@ -68,6 +68,15 @@ To control the interface with gestures the hand positions of the user need to be
   
   ## User Interface
 With the position of the hands known, a Javascript selection algorithm was used. The interface was built in HTML and hosted on a browser. It consists of an array of buttons to control the techno track. If the correct hand’s XY coordinates fall within a certain known region for a specific button, the Javascript function both lights up the button and changes the value of the object on the interface, and sends a new OSC message to Max to control parts of the patch. These messages are sent via the node.js server which connects the corresponding ports (8080) and transfers the data stream. An example message would be a value between 0-127 for master volume.
+  <br/><br/>
+ <p align="center">
+ <img width="800" src="images/interface.png">
+</p>
+
+<p align="center">
+  <i>Our user interface</i>
+</p>
+
 </details>
 
 
