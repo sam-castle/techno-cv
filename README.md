@@ -1,3 +1,7 @@
+  <p align="center">
+    <img width="1000" src="images/cover.png">
+</p>
+
 <h1 align="center">
   pose_and_tunes.
   </h1>
@@ -16,6 +20,17 @@
 
   
 ## Gallery
+  <p align="center">
+    <img width="1000" src="images/demo1.jpg">
+</p>
+
+  <p align="center">
+    <img width="1000" src="images/demo2.jpg">
+</p>
+
+  <p align="center">
+    <img width="1000" src="images/demo3.jpg">
+</p>
 
 
 ## Contents
