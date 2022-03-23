@@ -174,6 +174,14 @@ The looping function is built around the **groove~** function in Max. This funct
 <p align="center">
   <i>A three-track looper layers the different stems</i>
 </p>  
+  <br/><br/>
+   <p align="center">
+    <img width="700" src="images/tempovolume.PNG">
+</p>
+
+<p align="center">
+  <i>Tempo and volume are driven by OSC command messages</i>
+</p>  
     <br/><br/>
    <p align="center">
     <img width="700" src="images/loopstation2.PNG">
@@ -200,6 +208,23 @@ To start building a track each stem loop must be initiated, by selecting ‘Trac
   
   ## Filtering Effects
 Lowpass and highpass filtering can be added to the track similarly to the tempo and volume. Using an **if else** function, the upper half of the slider controls the highpass filter and the lower half controls the lowpass filter. Inside the **lowpass_highpass** subpatch, the **filtergraph~** function is used to select the filter shapes, and the slider value (scaled), is used to drive the cut off frequency and gain. With the filter shape defined, the **biquad~** function is used to implement the filter to both audio channels, applying the distinctive sound effect incorporated in most DJ decks. Filtering can be used to hide the transitions between loops to create a seamless audio experience.
+  
+  <br/><br/>
+   <p align="center">
+    <img width="550" src="images/filtercontrol.PNG">
+</p>
+
+<p align="center">
+  <i>The OSC message for filter level is sent into the lowpass_highpass subpatcher</i>
+</p>  
+  <br/><br/>
+   <p align="center">
+    <img width="800" src="images/lowpasshighpass.PNG">
+</p>
+
+<p align="center">
+  <i>A highpass filter is added for positive values and a lowpass for negative</i>
+</p>  
 
 </details>
 
