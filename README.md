@@ -20,18 +20,56 @@ Techno-cv is an interactive audio installation whereby a minimal techno track ca
 ## Contents
 
 <details>
-  <summary>Aims of the Work</summary>
+  <summary>Aim of the Work</summary>
   
-  ## Aims of the Work
-  Techno-cv is an interactive audio installation whereby a minimal techno track can be built-up and manipulated using just gestures. Displayed on a visual interface, samples can be selected and moulded, effects applied, and a sample synthesiser played, simply by moving one’s arms in space. The positions of your limbs are tracked using an opensource computer vision system, with the positions of your hands used to trigger buttons on the interface. These buttons in turn manipulate the parameters of a custom Max 8 patch in which samples are layered and filters applied to create a versatile minimal techno.
+  ## Aim of the Work
+All three of us love dance music AND dancing to music. This project birthed from the thought: what if instead of **dancing to music** you could **dance to create music**. Too long have DJs been constrained to their decks, the aim of this work is to explore whether exciting and commercially viable dance music can be created in a manner that is more **expressive** and **stimulating**.
+  <p align="center">
+    <img width="600" src="images/thomasbangalter.jpg">
+</p>
+
+<p align="center">
+  <i>Thomas Bangalter at the decks</i>
+</p>
 </details>
 
 <details>
   <summary>Installation Architecture</summary>
   
   ## Installation Architecture
-  Techno-cv is an interactive audio installation whereby a minimal techno track can be built-up and manipulated using just gestures. Displayed on a visual interface, samples can be selected and moulded, effects applied, and a sample synthesiser played, simply by moving one’s arms in space. The positions of your limbs are tracked using an opensource computer vision system, with the positions of your hands used to trigger buttons on the interface. These buttons in turn manipulate the parameters of a custom Max 8 patch in which samples are layered and filters applied to create a versatile minimal techno.
+  The overall system can be broken down into four major components. Identifying the user’s hands, the user interface, selecting buttons and sending the selections as messages, and building a techno track based on the selected parameters.
+  
+  Hardware wise, the system technically only requires a laptop with a webcam, however the experience is significantly improved by using a large TV monitor and a loudspeaker for superior audio quality.
+  
+Here is a high-level system diagram of the installation:
+  <br/><br/>
+   <p align="center">
+    <img width="800" src="images/systemdiagram.png">
+</p>
+
+<p align="center">
+  <i>High-level system diagram</i>
+</p>
+
+
 </details>
+
+
+<details>
+  <summary>Computer Vision</summary>
+  
+  ## Computer Vision
+To control the interface with gestures the hand positions of the user need to be tracked. To do so, the computer’s webcam is accessed and an opensource pose model was used, Google’s Media Pipe, a highly accurate, and responsive system. With this, the user’s hands are identified and their 2D coordinates on the screen are defined and used to trigger samples and effects. The positions of the hands are shown visually on the screen for the user as a point of reference.
+
+</details>
+
+<details>
+  <summary>User Interface</summary>
+  
+  ## User Interface
+With the position of the hands known, a Javascript selection algorithm was used. The interface was built in HTML and hosted on a browser. It consists of an array of buttons to control the techno track. If the correct hand’s XY coordinates fall within a certain known region for a specific button, the Javascript function both lights up the button and changes the value of the object on the interface, and sends a new OSC message to Max to control parts of the patch. These messages are sent via the node.js server which connects the corresponding ports (8080) and transfers the data stream. An example message would be a value between 0-127 for master volume.
+</details>
+
 
 <details>
   <summary>Max Patch Overview</summary>
