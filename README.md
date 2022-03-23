@@ -283,19 +283,28 @@ The MIDI note number is converted to frequency (**mtof**), and then divided by t
 <details>
   <summary>Review and Future Work</summary>
   
-  ## Future Work and Improvements
-  Techno-cv is an interactive audio installation whereby a minimal techno track can be built-up and manipulated using just gestures. Displayed on a visual interface, samples can be selected and moulded, effects applied, and a sample synthesiser played, simply by moving one’s arms in space. The positions of your limbs are tracked using an opensource computer vision system, with the positions of your hands used to trigger buttons on the interface. These buttons in turn manipulate the parameters of a custom Max 8 patch in which samples are layered and filters applied to create a versatile minimal techno.
+  ## Review and Future Work
+Our installation was a huge success with everyone who tried it, both during testing and the demo day presentation at the Dyson School, 22/03/22. I think a good indicator of success was the number of people pulling out their phones to take videos!
+  
+Users were able to easily pick up the interaction and get good results quickly. What was interesting too was that although the installation doesn’t require the user to dance when interacting with it, there were a lot of club-like dance moves on show, I think in part influenced by the clever placement of the sample synth at the top of the installation.
+  
+There were however a few issues highlighted by the demos:
+-	The sensitivity of some buttons was too high, with volume and filters being effected when accidently brushed.
+-	The computer vision sometimes struggles if there are multiple people in frame.
+-	The height differences meant that the webcam sometimes had to be adjusted to facilitate some users.
+-	After a great number of people had tried it, we were starting to get a little bored of the samples!
+  
+These issues suggest that the following improvements should be made:
+-	Develop open hand, closed hand recognition for selecting buttons, this way sliders could be incorporated for more sweeping gestures.
+-	Create a calibration mode to adjust for height differences.
+-	Develop a greater range of samples, perhaps in sample packs for different genres.
+  
+Aside from these issues, I think it would also be interesting to develop this concept as a webapp so that anyone could use it anywhere. Finally, in our initial workplan we had considered adding a binaural element to the design, spatialising different stems to better differentiate them. Personally, I don’t think this would be logical area for the progression of the concept. Dance music is best enjoyed in a crowd, so a better course of action would be to optimise the system for large nightclubs such as Printworks.
+
 </details>
 
 
-<p align="center">
-    <img width="600" src="images/pm.PNG">
-</p>
-
-<p align="center">
-  <i>Max Patch in presentation mode</i>
-</p>
 
 
 
-- [ ] Add delight to the experience when all tasks are complete
+
