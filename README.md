@@ -79,7 +79,7 @@ Here is a high-level system diagram of the installation:
   <summary>Computer Vision</summary>
   
   ## Computer Vision
-To control the interface with gestures the hand positions of the user need to be tracked. To do so, the computer’s webcam is accessed and an opensource pose model was used, Google’s Media Pipe, a highly accurate, and responsive system. With this, the user’s hands are identified and their 2D coordinates on the screen are defined and used to trigger samples and effects. The positions of the hands are shown visually on the screen for the user as a point of reference.
+To control the interface with gestures the hand positions of the user need to be tracked. To do so, the computer’s webcam is accessed and an opensource pose model was used, Google’s Media Pipe, a highly accurate, and responsive system. With this, the user’s hands are identified, their 2D coordinates on the screen are defined and then used to trigger samples and effects. The positions of the hands are shown visually on the screen for the user as a point of reference.
   <br/><br/>
  <p align="center">
  <img width="400" src="images/cv.png">
@@ -94,7 +94,7 @@ To control the interface with gestures the hand positions of the user need to be
   <summary>User Interface</summary>
   
   ## User Interface
-With the position of the hands known, a Javascript selection algorithm was used. The interface was built in HTML and hosted on a browser. It consists of an array of buttons to control the techno track. If the correct hand’s XY coordinates fall within a certain known region for a specific button, the Javascript function both lights up the button and changes the value of the object on the interface, and sends a new OSC message to Max to control parts of the patch. These messages are sent via the node.js server which connects the corresponding ports (8080) and transfers the data stream. An example message would be a value between 0-127 for master volume.
+The interface was built in HTML and hosted on a browser. It consists of an array of buttons to control the techno track. With the position of the hands known, a Javascript selection algorithm was used. If the correct hand’s XY coordinates fall within a certain known region for a specific button, the Javascript function both lights up the button and changes the value of the object on the interface, and sends a new OSC message to Max to control parts of the patch. These messages are sent via the node.js server which connects the corresponding ports (8080) and transfers the data stream. An example message would be a value between 0-127 for master volume.
   
   Have a play with the interface [here](https://posentunes.web.app/).
   <br/><br/>
