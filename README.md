@@ -166,6 +166,22 @@ To control the sample switches using the computer vision inputs, the patch neede
   
   ## The Looper
 The looping function is built around the **groove~** function in Max. This function accesses the buffer to which it is assigned and allows it to be looped. It also allows various parameters to be controlled, with values brought in with **udpreceive** from the Node server. Tempo is controlled by changing the speed of the signal running into **groove~**. The Time Stretch function has been used to stop the samples from changing pitch when the tempo is increased. The volume of the track is controlled by simply scaling a slider to appropriate dB values (-70 to +6) and using the output to drive the master gain. The gain of each stem can be controlled within the patch, to mix the track, however this has been pre-mixed to appropriate values for a good balance.
+  <br/><br/>
+   <p align="center">
+    <img width="700" src="images/cvdata.PNG">
+</p>
+
+<p align="center">
+  <i>OSC data routed to receivedata subpatch using udpreceive</i>
+</p>  
+    <br/><br/>
+   <p align="center">
+    <img width="700" src="images/receivedata.PNG">
+</p>
+
+<p align="center">
+  <i>Samples are switched on the beat</i>
+</p>   
   
 To start building a track each stem loop must be initiated, by selecting ‘Track ON/OFF’. This starts the stems synchronously and silently until the sound for each is turned ion. Technically, the ‘turning on/off’ of the stems is achieved by setting the amplitude of signal to 0, if toggled off, and 1, if toggled on. The ‘Loop’, ‘Sync’, ‘Time Stretch’ and ‘Speakers’ toggles all also must be turned on at the programs start. Since some of the samples are different lengths, the Loop Sync output of **groove~** is used to start the other loops from the beginning whenever the drumbeat reaches the start of the sample. 
 
