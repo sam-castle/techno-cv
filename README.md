@@ -121,8 +121,42 @@ The samples were downloaded from the free sample library at BandLab. A great dea
 
    ### Switching Between Samples
   With the samples chosen, they were loaded into the Max patch. This was achieved using four buffers (**buffer~**), one for each stem and one for the sample synth. Using **radiogroups** a new sample can be loaded into the buffer by clicking on the corresponding dot. Inside the subpatchers **drumsamples**, **basssamples**, and **melodicsamples**, replace messages, calling .wav files from the computer, are sent to the buffer with the **select** function. The new sample carries on playing from the same point in the buffer allowing the track to remain synchronised.
-  
+    <br/><br/>
+   <p align="center">
+    <img width="700" src="images/stemsamples.PNG">
+ </p>
+
+ <p align="center">
+  <i>Choose between multiple samples for each stem</i>
+ </p>  
+    <br/><br/>
+   <p align="center">
+    <img width="700" src="images/drumsamples.PNG">
+ </p>
+
+ <p align="center">
+  <i>.wav file samples are loaded into the buffers</i>
+ </p>  
+    <br/><br/>  
+
 To control the sample switches using the computer vision inputs, the patch needed a way to take in that data. The **udpreceive** function (port 8080) takes in streams of OSC data from Javascript, via the Node server, for each stem and channels them into the **receivedata** subpatcher. For each variable the choice of sample (off, 1, 2 or 3) is sent into an **int** function, storing the selection until a beat from the metronome is sent through. Since the data input is a continuous stream, the **change** function is used to only identify when the selection has changed.
+  
+  <br/><br/>
+   <p align="center">
+    <img width="700" src="images/cvdata.PNG">
+</p>
+
+<p align="center">
+  <i>OSC data routed to receivedata subpatch using udpreceive</i>
+</p>  
+    <br/><br/>
+   <p align="center">
+    <img width="700" src="images/receivedata.PNG">
+</p>
+
+<p align="center">
+  <i>Samples are switched on the beat</i>
+</p>   
 
 </details>
 
