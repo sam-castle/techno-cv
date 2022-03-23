@@ -87,7 +87,15 @@ With the position of the hands known, a Javascript selection algorithm was used.
 As I had prior experience working in Max 8, I created the audio control patch to take in the gesture inputs and build a track from them. The core functionality of the patch is based on a three-track looper which allows you to build up a simple techno track from a predefined set of samples and manipulate parameters such as tempo and volume. In addition, the patch allows you to apply effect filters, high- and lowpass, distorting the sound as DJs often do on their decks. Finally, the patch allows you to play a sample up and down a scale, perfectly in time, over the loop with a synchronised sample synthesiser.
   
 Therefore, we can split the functionality of the patch down into four main stages: selecting the samples, looping the samples (and controlling their gain and tempo), applying high and lowpass filters, and playing the sample synth on the predefined scale.
-  
+  <br/><br/>
+   <p align="center">
+    <img width="800" src="images/toplevelmax.png">
+</p>
+
+<p align="center">
+  <i>Top level of Max patch</i>
+</p>  
+  <br/><br/>
 <i>The patch can be controlled with the gesture inputs via the computer vision system or via the Max interface and key presses on the computer keyboard.</i>
 
 </details>
