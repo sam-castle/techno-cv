@@ -312,7 +312,7 @@ The MIDI note number is converted to frequency (**mtof**), and then divided by t
   <summary>Review and Future Work</summary>
   
   ## Review and Future Work
-Our installation was a huge success with everyone who tried it, both during testing and the demo day presentation at the Dyson School, 22/03/22. I think a good indicator of success was the number of people pulling out their phones to take videos!
+Our installation was a huge success with everyone who tried it, both during testing and the demo day presentation at the Dyson School, 22/03/22. I think a good indicator of success was the number of people pulling out their phones to take videos, and we were asked to showcase the work at the School's Open House Exhibition in June.
   
 Users were able to easily pick up the interaction and get good results quickly. What was interesting too was that although the installation doesn’t require the user to dance when interacting with it, there were a lot of club-like dance moves on show, I think in part influenced by the clever placement of the sample synth at the top of the installation.
   
@@ -336,7 +336,7 @@ Aside from these issues, I think it would also be interesting to develop this co
   <summary>Acknowledgements</summary>
   
   ## Acknowledgements
-
+I would particularly like to thank Dr Lorenzo Picinali for his support and guidance through the development of the Max patch. In addition, the tutorials of <a href="https://www.youtube.com/user/dearjohnreed">dearjohnreed</a> were a very helpful start point for several parts of the patch.
 </details>
 
 
