@@ -1,5 +1,5 @@
 <h1 align="center">
-  pose and tunes.
+  pose_and_tunes.
   </h1>
  <p align="center">
   <i>Sam Castle, Ted Kane, Jack Polturak</i> <br/>
@@ -7,7 +7,7 @@
 </p>
 <br/><br/>
 <p align="center">
-Techno-cv is an interactive audio installation whereby a minimal techno track can be built-up and manipulated using just gestures. Displayed on a visual interface, samples can be selected and moulded, effects applied, and a sample synthesiser played, simply by moving one’s arms in space. The positions of your hands are tracked, using an opensource computer vision system, and used to trigger buttons on the interface. These buttons in turn manipulate the parameters of a custom Max 8 patch in which samples are layered and filters applied to create a versatile minimal techno. A short video of the installation can be found <a href="https://youtube.com/watch?v=shPU7SSHDCY/">here</a>.
+'Pose and Tunes' is an interactive audio installation whereby a minimal techno track can be built-up and manipulated using just gestures. Displayed on a visual interface, samples can be selected and moulded, effects applied, and a sample synthesiser played, simply by moving one’s arms in space. The positions of your hands are tracked, using an opensource computer vision system, and used to trigger buttons on the interface. These buttons in turn manipulate the parameters of a custom Max 8 patch in which samples are layered and filters applied to create a versatile minimal techno. A short video of the installation can be found <a href="https://youtube.com/watch?v=shPU7SSHDCY/">here</a>.
   
 
   </p>
