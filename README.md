@@ -11,15 +11,21 @@
   <p align="center">
     <img width="800" src="images/cover.png">
 </p>
-<p align="center">
- <br/><br/>
+<br></br>
+  <h2 align="left">
+  Abstract
+  </h1>
+  <p align="left">
 techno-cv is an interactive audio installation whereby a minimal techno track can be built-up and manipulated using just gestures. Displayed on a visual interface, samples can be selected and moulded, effects applied, and a sample synthesiser played, simply by moving one’s arms in space. The positions of your hands are tracked, using an opensource computer vision system, and used to trigger buttons on the interface. These buttons in turn manipulate the parameters of a custom Max 8 patch in which samples are layered and filters applied to create a versatile minimal techno track. A short video of the installation can be found <a href="https://youtu.be/G8Mb8XTaFfQ/">here</a>.
   </p>
-  <p align="center">
-  <i>N.B. Whilst this report outlines the project as a whole, I have focussed on the work I personally contributed.</i>
+  <p align="left">
+  <i>Keywords: Computer Vision, Audio Experience Design, Techno, Dance Music, Body-tracking</i>
+  </p>
+  <p align="left">
+  <i><b>N.B. Whilst this report outlines the project as a whole, I have focussed on the work I personally contributed.</b></i>
   </p>
 
-
+<br></br>
   
 ## Gallery
   <p align="center">
